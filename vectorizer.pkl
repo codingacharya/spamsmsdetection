@@ -1,0 +1,17 @@
+import pandas as pd
+from sklearn.feature_extraction.text import CountVectorizer
+import joblib
+
+# Load dataset (Ensure you have a CSV with 'message' column)
+df = pd.read_csv("spam.csv")  # Replace with your dataset file
+
+# Initialize CountVectorizer
+vectorizer = CountVectorizer()
+
+# Fit the vectorizer on the text messages
+vectorizer.fit(df["message"])
+
+# Save the vectorizer
+joblib.dump(vectorizer, "vectorizer.pkl")
+
+print("✅ Vectorizer saved successfully as 'vectorizer.pkl'")
