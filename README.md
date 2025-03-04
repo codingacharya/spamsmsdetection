@@ -1,4 +1,4 @@
-git clone 
+git clone https://github.com/codingacharya/spamsmsdetection.git
 
 cd spamsmsdetection
 
