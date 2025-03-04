@@ -1,20 +1,28 @@
+import pandas as pd
 from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.naive_bayes import MultinomialNB
 import joblib
-import pandas as pd
 
-# Load dataset (Ensure you have a CSV with 'message' and 'label' columns)
-df = pd.read_csv("spam.csv")
+# Load dataset (Ensure it has 'message' and 'label' columns)
+df = pd.read_csv("spam.csv")  # Replace with your dataset file
 
-# Text Vectorization
+# Convert labels to binary format if needed
+df['label'] = df['label'].map({'ham': 0, 'spam': 1})  # Convert 'ham' to 0 and 'spam' to 1
+
+# Initialize CountVectorizer
 vectorizer = CountVectorizer()
+
+# Transform text data
 X = vectorizer.fit_transform(df["message"])
 y = df["label"]
 
-# Train Model
+# Train Naïve Bayes model
 model = MultinomialNB()
 model.fit(X, y)
 
-# Save Model & Vectorizer
+# Save the trained model and vectorizer
 joblib.dump(model, "spam_model.pkl")
 joblib.dump(vectorizer, "vectorizer.pkl")
+
+print("✅ Model saved successfully as 'spam_model.pkl'")
+print("✅ Vectorizer saved successfully as 'vectorizer.pkl'")
